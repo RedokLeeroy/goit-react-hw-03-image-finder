@@ -13,7 +13,6 @@ import 'react-toastify/dist/ReactToastify.css';
 export class App extends Component {
   state = {
     images: [],
-    isShown: false,
     page: 1,
     loading: false,
     query: '',
