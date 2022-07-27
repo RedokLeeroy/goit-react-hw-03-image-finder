@@ -1,4 +1,4 @@
-import { Component, Fragment } from 'react';
+import { Component} from 'react';
 import { mapper } from './utils/mapper';
 import { GalleryList } from './GalleryList.jsx/GalleryList';
 import { SearchBar } from './SearchBar/SearchBar';
@@ -59,13 +59,13 @@ componentDidUpdate( _ ,prevState) {
   }
 
  render() {
-  return <Fragment className="App">
+  return <div className="App">
   <SearchBar onSubmit ={this.handlerSubmit}  />
    <GalleryList images={this.state.images} handlerModal={this.handlerModal}/>
    {this.state.loading && (<LoaderSpinner/>)}
    {this.state.images.length >= 12 * this.state.page && <button onClick={this.handlerLoadMore} className="Button">Load More</button>}
    {this.state.largeIMG && <Modal largeimg={this.state.largeIMG} onClose={this.modalWindowClose}/>}
    <ToastContainer autoClose={3000} />
-  </Fragment>
+  </div>
  }
 };

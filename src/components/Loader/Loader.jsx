@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
 import styles from '../Loader/Loader.module.css';
 import { BallTriangle } from 'react-loader-spinner';
 
-export class LoaderSpinner extends Component {
-  state = {};
-  render() {
+export const LoaderSpinner= () => {
     return (
       <div className={styles.loader}>
         <BallTriangle
@@ -16,4 +13,3 @@ export class LoaderSpinner extends Component {
       </div>
     );
   }
-}
