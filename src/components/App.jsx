@@ -20,15 +20,16 @@ export class App extends Component {
   };
  
 componentDidUpdate( _ ,prevState) {
-  if (prevState.query !== this.state.query) {
-
+  if (prevState.query !== this.state.query ) {
     this.searchImg()
+  }else if(prevState.page !== this.state.page && this.state.page !== 1){
+    this.fetchLoadImg()
   }
 }
 
   searchImg = () => {
     this.setState({loading: true})
-        Service(this.state.page, this.state.query).then(({data}) => {if(data.hits.length === 0){return toast.error("no match found")}this.setState({images : mapper(data) })})
+        Service(this.state.page, this.state.query).then(({data}) => {data.hits.length === 0 ?toast.error("no match found"):this.setState({images : mapper(data), page: 1 })})
     .finally(() => this.setState({loading: false}))
   }
 
@@ -38,7 +39,7 @@ componentDidUpdate( _ ,prevState) {
 
     fetchLoadImg = () => {
     this.setState({loading: true})
-    Service(this.state.page + 1, this.state.query).then(({data}) => {this.setState((ps) =>({page: ps.page + 1,images : [...(ps.images), ...mapper(data)]}))})
+    Service(this.state.page, this.state.query).then(({data}) => {this.setState((ps) =>({images : [...(ps.images), ...mapper(data)]}))})
     .finally(() => this.setState({loading: false}))
   }
 
@@ -53,12 +54,16 @@ componentDidUpdate( _ ,prevState) {
 
   };
 
+  handlerLoadMore = () => {
+    this.setState((ps) => ({page: ps.page + 1 }))
+  }
+
  render() {
   return <>
   <SearchBar onSubmit ={this.handlerSubmit}  />
    <GalleryList images={this.state.images} handlerModal={this.handlerModal}/>
    {this.state.loading && (<Loader/>)}
-   {this.state.images.length >= 12 * this.state.page && <button onClick={this.fetchLoadImg}>Load More</button>}
+   {this.state.images.length >= 12 * this.state.page && <button onClick={this.handlerLoadMore}>Load More</button>}
    {this.state.largeIMG && <Modal largeimg={this.state.largeIMG} onClose={this.modalWindowClose}/>}
    <ToastContainer autoClose={3000} />
   </>
