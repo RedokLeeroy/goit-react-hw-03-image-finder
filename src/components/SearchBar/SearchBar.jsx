@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from "prop-types"
 
 export class SearchBar extends Component { 
     
@@ -41,4 +42,8 @@ export class SearchBar extends Component {
   </form>
 </header>
     }
+}
+
+SearchBar.propTypes = {
+    onSubmit: PropTypes.func
 }
