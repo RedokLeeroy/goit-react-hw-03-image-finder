@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, Fragment } from 'react';
 import { mapper } from './utils/mapper';
 import { GalleryList } from './GalleryList.jsx/GalleryList';
 import { SearchBar } from './SearchBar/SearchBar';
@@ -6,7 +6,7 @@ import { Service } from './serviceApi/serviceApi';
 import { toast } from 'react-toastify';
 import { ToastContainer } from 'react-toastify';
 import { Modal } from './Modal/Modal';
-import { Loader } from './Loader/Loader';
+import { LoaderSpinner } from './Loader/Loader';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -59,13 +59,13 @@ componentDidUpdate( _ ,prevState) {
   }
 
  render() {
-  return <>
+  return <Fragment className="App">
   <SearchBar onSubmit ={this.handlerSubmit}  />
    <GalleryList images={this.state.images} handlerModal={this.handlerModal}/>
-   {this.state.loading && (<Loader/>)}
-   {this.state.images.length >= 12 * this.state.page && <button onClick={this.handlerLoadMore}>Load More</button>}
+   {this.state.loading && (<LoaderSpinner/>)}
+   {this.state.images.length >= 12 * this.state.page && <button onClick={this.handlerLoadMore} className="Button">Load More</button>}
    {this.state.largeIMG && <Modal largeimg={this.state.largeIMG} onClose={this.modalWindowClose}/>}
    <ToastContainer autoClose={3000} />
-  </>
+  </Fragment>
  }
 };

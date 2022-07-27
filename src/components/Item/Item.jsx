@@ -1,7 +1,8 @@
 import PropTypes from "prop-types"
+import s from "./Item.module.css"
 export const Item = ({small, handlerModal, large}) => {
-    return <li class="gallery-item">
-  <img src={small} alt="pictur" onClick={()=> handlerModal(large)}/>
+    return <li className={s.galleryItem}>
+  <img className={s.image} src={small} alt="pictur" onClick={()=> handlerModal(large)}/>
 </li>
 }
 

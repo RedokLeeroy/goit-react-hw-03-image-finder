@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types"
+import s from "./Modal.module.css"
 const body = document.querySelector('body');
 export class Modal extends Component {
 
@@ -25,9 +26,9 @@ export class Modal extends Component {
   };
   render() {
     return (
-      <div onClick={this.backDropClick} className="backDrop">
-        <div className='modal'>
-          <img src={this.props.largeimg} alt="pitr" />
+      <div onClick={this.backDropClick} className={s.backDrop}>
+        <div className={s.modal}>
+          <img src={this.props.largeimg} alt="pictr" />
         </div>
       </div>
     );
